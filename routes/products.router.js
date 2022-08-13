@@ -39,4 +39,14 @@ router.post('/', (req, res) => {
   });
 });
 
+router.patch('/:id', (req, res) => {
+  const { id } = req.params;
+  const body = req.body;
+  res.json({
+    message: "Product partial updated",
+    data: body,
+    id
+  })
+})
+
 module.exports = router;
