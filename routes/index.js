@@ -6,9 +6,11 @@ const categoriesRouter = require('./categories.router');
 
 function routerApi(app) {
   // endpoint setup
-  app.use('/products', productosRouter);
-  app.use('users', usersRouter);
-  app.use('categories', categoriesRouter);
+  const router = require('express').Router();
+  app.use('/api/v1', router);
+  router.use('/products', productosRouter);
+  router.use('/users', usersRouter);
+  router.use('/categories', categoriesRouter);
 }
 
 module.exports = routerApi;
