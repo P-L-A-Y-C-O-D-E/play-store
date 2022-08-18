@@ -5,17 +5,17 @@ const routerApi = require('./routes');
 const { logErrors, errorHandler, boomErrorHandler } = require('./middlewares/error.handler');
 
 const app = express();
-const port = 3000;
+const port = process.env.PORT || 3000;
 
 // middleware
 app.use(express.json());
 
 // CORS middleware
 // app.use(cors()); // allow everyone like a public API
-const whitelist = ['http://localhost:8080', 'http://myapp.com'];
+const whitelist = ['http://localhost:8080', 'http://myapp.co'];
 const options = {
   origin: (origin, callback) => {
-    if (origin.includes(whitelist)) {
+    if (whitelist.includes(origin) || !origin) {
       callback(null, true); // no errors, allow access
     } else {
       callback(new Error('Access not allow'));
