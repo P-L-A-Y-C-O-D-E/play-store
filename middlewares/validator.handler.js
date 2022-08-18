@@ -8,7 +8,10 @@ function validatorHandler(schema, property) {
   // Clousers = Clausuras = Creacion de un middleware de forma dinamica
   return (req, res, next) => {
     const data = req[property];
-    const { error } = schema.validate(data, { abortEarly: false });
+    const { error } = schema.validate(
+      data,
+      { abortEarly: false } // send all errors in the same time and not one by one
+      );
     if (error) {
       next(boom.badRequest(error)); // enviamos el middleware a los demas middlewares
     }
